@@ -5,12 +5,7 @@ import "./globals.css";
 export default function Index() {
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    className="flex-1 justify-center align-middle">
       <Text className="text-lg text-blue-500">HomePage</Text>
       <TouchableOpacity onPress={() => router.push("/(auth)/sign-up")}>
         <Text>Go to Sign Up</Text>
