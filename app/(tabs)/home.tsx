@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/store/useAuthStore'
+import * as Clipboard from 'expo-clipboard'
 import { router } from 'expo-router'
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native'
@@ -40,7 +41,8 @@ const Home = () => {
     fetchSpaces()
   }, [user, token])
 
-  const handleCopy = (token: string) => {
+  const handleCopy = async(token: string) => {
+    await Clipboard.setStringAsync(token)
     Alert.alert("Copied!", `Token: ${token}`)
   }
 
@@ -55,12 +57,6 @@ const Home = () => {
           onPress={() => router.push("/(screen)/createSpace")}
         >
           <Text className="text-white font-semibold text-base">Create Space</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          className="flex-1 bg-green-600 ml-2 py-3 rounded-xl shadow-sm items-center"
-          onPress={() => Alert.alert("Coming Soon", "Join with Token feature")}
-        >
-          <Text className="text-white font-semibold text-base">Join with Token</Text>
         </TouchableOpacity>
       </View>
 
@@ -82,7 +78,7 @@ const Home = () => {
 
                 <TouchableOpacity
                   onPress={() => handleCopy(space.token)}
-                  className="self-start border border-gray-500 px-3 py-1 rounded-full"
+                  className="self-start border text-lg font-bold border-gray-500 px-3 py-2 rounded-lg "
                 >
                   <Text className="text-xs font-medium text-gray-700">Copy Token</Text>
                 </TouchableOpacity>
